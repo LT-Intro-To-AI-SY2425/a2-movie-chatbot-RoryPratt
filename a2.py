@@ -14,18 +14,32 @@ def match(pattern: List[str], source: List[str]) -> List[str]:
         None if the pattern and source do not "match" ELSE A list of matched words
         (words in the source corresponding to _'s or %'s, in the pattern, if any)
     """
-    sind = 0  # current index we are looking at in source list
-    pind = 0  # current index we are looking at in pattern list
+    si = 0  # current index we are looking at in source list
+    pi = 0  # current index we are looking at in pattern list
     result: List[str] = []  # to store substitutions we will return if matched
 
     # keep checking as long as we haven't hit the end of either pattern or source while
     # pind is still a valid index OR sind is still a valid index (valid index means that
     # the index is != to the length of the list)
-    while "FILL IN CONDITION HERE":
-        # your job is to fill out the body of this loop
+    while pi < len(source):
+        if pattern[pi] == "_":
+            result.append(source[si])
+            si += 1
+        elif pattern[pi] == "%":
+            while si < len(source):
+                if pi + 1 >= len(pattern):
+                    result.append("")
+                    break
+                # if
+                si += 1
+        elif pi < len(pattern) and si < len(source):
+            if pattern[pi] != source[si]: return None
+        else: return None # fix for pattern index being greater than source index return none p1+1 needs to be before this or this needs to be at the start.
 
         # you should delete the following line
-        return ["Not done yet :)"]
+
+        pi+=1
+        return result
 
         # 1) if we reached the end of the pattern but not source
 
