@@ -21,25 +21,32 @@ def match(pattern: List[str], source: List[str]) -> List[str]:
     # keep checking as long as we haven't hit the end of either pattern or source while
     # pind is still a valid index OR sind is still a valid index (valid index means that
     # the index is != to the length of the list)
-    while pi < len(source):
-        if pattern[pi] == "_":
+    while si < len(source) or pi < len(pattern):
+        if pi >= len(pattern) or (si >= len(source) and pi >= len(pattern)): return None
+        elif pattern[pi] == "%" and si >= len(source):
+            result.append("")
+            return result
+        elif si >= len(source): return None
+        if pattern[pi] == source[si]:
+            pi += 1
+            si += 1
+        elif pattern[pi] == "_":
             result.append(source[si])
             si += 1
+            pi += 1
         elif pattern[pi] == "%":
-            while si < len(source):
-                if pi + 1 >= len(pattern):
-                    result.append("")
-                    break
-                # if
+            pi += 1
+            ans = ""
+            t = "" if pi >= len(pattern) else pattern[pi]
+            while t != source[si]:
+                ans += (source[si] + " ")
                 si += 1
-        elif pi < len(pattern) and si < len(source):
-            if pattern[pi] != source[si]: return None
-        else: return None # fix for pattern index being greater than source index return none p1+1 needs to be before this or this needs to be at the start.
+                if si >= len(source): break
+            result.append(ans[:-1])
+        else: return None
 
         # you should delete the following line
-
-        pi+=1
-        return result
+    return result
 
         # 1) if we reached the end of the pattern but not source
 
@@ -58,8 +65,6 @@ def match(pattern: List[str], source: List[str]) -> List[str]:
         # 6) else : this will happen if none of the other conditions are met it
         # indicates the current thing it pattern doesn't match the current thing in
         # source
-
-    return result
 
 
 if __name__ == "__main__":
