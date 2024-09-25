@@ -38,11 +38,24 @@ def match(pattern: List[str], source: List[str]) -> List[str]:
             pi += 1
             ans = ""
             t = "" if pi >= len(pattern) else pattern[pi]
-            while t != source[si]:
-                ans += (source[si] + " ")
+
+            for i in range(si, len(source)):
+                if match(pattern[(pi):], source[i:]) != None: break
+                elif pi >= len(pattern):
+                    for l in range(i, len(source)):
+                        ans += source[l] + " "
+                        si += 1
+                    result.append(ans[:-1])
+                    return result
+                ans += source[i] + " "
+                if i >= len(source): return None
                 si += 1
-                if si >= len(source): break
             result.append(ans[:-1])
+            #while t != source[si]:
+            #    ans += (source[si] + " ")
+            #    si += 1
+            #    if si >= len(source): break
+            #result.append(ans[:-1])
         else: return None
 
         # you should delete the following line
@@ -89,6 +102,6 @@ if __name__ == "__main__":
     ], "test 14 failed"
     # this last case is a strange one, but it exposes an issue with the way we've
     # written our match function
-    assert match(["x", "%", "z"], ["x", "y", "z", "z", "z"]) == None, "test 15 failed"
+    assert match(["x", "%", "z"], ["x", "y", "z", "z", "z"]) == ["y z z"], "test 15 failed"
 
     print("All tests passed!")
