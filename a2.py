@@ -102,6 +102,6 @@ if __name__ == "__main__":
     ], "test 14 failed"
     # this last case is a strange one, but it exposes an issue with the way we've
     # written our match function
-    assert match(["x", "%", "z"], ["x", "y", "z", "z", "z"]) == ["y z z"], "test 15 failed"
+    assert match(["x", "%", "z"], ["x", "y", "z", "z", "z"]) == ["y z z"], "test 15 failed" # changed
 
     print("All tests passed!")
