@@ -51,11 +51,11 @@ def match(pattern: List[str], source: List[str]) -> List[str]:
                 if i >= len(source): return None
                 si += 1
             result.append(ans[:-1])
-            #while t != source[si]:
-            #    ans += (source[si] + " ")
-            #    si += 1
-            #    if si >= len(source): break
-            #result.append(ans[:-1])
+
+
+            #ans += " ".join(source[si:])
+            #result.append(ans)
+            #return result
         else: return None
 
         # you should delete the following line
